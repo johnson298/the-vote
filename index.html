@@ -31,20 +31,20 @@
                     <span class="text-right mt-2" style="width: 200px;">Lượt bình chọn</span>
                 </div>
                 <div class="votes__list">
-                    <div class="votes__list-item">
-                        <div class="img">
-                            <img src="./assets/images/baby.jpg" alt="">
-                        </div>
-                        <div class="kid-info">
-                            <h4>Nguyễn Thanh Tú</h4>
-                            <small>10/10/2020</small>
-                            <p>Hà Nội</p>
-                            <p><strong class="text-warning">MSBC: 01</strong></p>
-                        </div>
-                        <div class="count-vote">
-                            <span>1520</span>
-                        </div>
-                    </div>
+<!--                    <div class="votes__list-item">-->
+<!--                        <div class="img">-->
+<!--                            <img src="./assets/images/baby.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="kid-info">-->
+<!--                            <h4>Nguyễn Thanh Tú</h4>-->
+<!--                            <small>10/10/2020</small>-->
+<!--                            <p>Hà Nội</p>-->
+<!--                            <p><strong class="text-warning">MSBC: 01</strong></p>-->
+<!--                        </div>-->
+<!--                        <div class="count-vote">-->
+<!--                            <span>1520</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="votes__list-item" v-for="(user, index) in searchUser" :key="`user_${index}`">
                         <div class="img">
                             <img :src="user.hinh_anh_thi_sinh" alt="">
