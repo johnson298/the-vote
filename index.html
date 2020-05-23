@@ -4,29 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- BOOTSTRAP CSS -->
+    <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 </head>
 <body>
-
-    <div id="app">
-        <h1>{{ a }}</h1>
+    <div class="row justify-content-center">
+        <div class="col-12 d-flex justify-content-center mb-4">
+            <img class="img-sms" src="./assets/images/main-sms.png" alt="">
+        </div>
+        <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-9 col-12">
+            <div class="votes__head d-flex justify-content-between">
+                <h5>Thí sinh</h5>
+                <h5>Lượt bình chọn</h5>
+            </div>
+            <div class="votes__list">
+                <div class="votes__list-item">
+                    <div class="img">
+                        <img src="./assets/images/baby.jpg" alt="">
+                    </div>
+                    <div class="kid-info">
+                        <h4>Nguyễn Thanh Tú</h4>
+                        <small>10/10/2020</small>
+                        <p>Hà Nội</p>
+                        <p><strong class="text-warning">MSBC: 01</strong></p>
+                    </div>
+                    <div class="count-vote">
+                        <span>1520</span>
+                    </div>
+                </div>
+                <div class="votes__list-item">
+                    <div class="img">
+                        <img src="./assets/images/baby.jpg" alt="">
+                    </div>
+                    <div class="kid-info">
+                        <h4>Nguyễn Thanh Tú</h4>
+                        <small>10/10/2020</small>
+                        <p>Hà Nội</p>
+                        <p><strong class="text-warning">MSBC: 01</strong></p>
+                    </div>
+                    <div class="count-vote">
+                        <span>1520</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
-
-
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
 
 <script>
-    
     // Your web app's Firebase configuration
-    var firebaseConfig = {
+    let firebaseConfig = {
         apiKey: "AIzaSyC4YUmtVxjWd6sIYb_j4jxSn1GUEYxTDyQ",
         authDomain: "ikid-558b8.firebaseapp.com",
         databaseURL: "https://ikid-558b8.firebaseio.com",
@@ -36,7 +68,7 @@
         appId: "1:231955149193:web:057855b939f4d120807158"
     };
     firebase.initializeApp(firebaseConfig);
-    var ref = firebase.database().ref();
+    let ref = firebase.database().ref();
 
     ref.on("value", function(snapshot) {
         console.log(snapshot.val());
