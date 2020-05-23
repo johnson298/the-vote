@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h1>{{ a }}</h1>
+    </div>
+
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+    
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyC4YUmtVxjWd6sIYb_j4jxSn1GUEYxTDyQ",
+        authDomain: "ikid-558b8.firebaseapp.com",
+        databaseURL: "https://ikid-558b8.firebaseio.com",
+        projectId: "ikid-558b8",
+        storageBucket: "ikid-558b8.appspot.com",
+        messagingSenderId: "231955149193",
+        appId: "1:231955149193:web:057855b939f4d120807158"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var ref = firebase.database().ref();
+
+    ref.on("value", function(snapshot) {
+        console.log(snapshot.val());
+    }, function (error) {
+        console.log("Error: " + error.code);
+    });
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                a: 'sdlkjsldfksldkd'
+            }
+        }
+    })
+</script>
+</body>
+</html>
