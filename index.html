@@ -99,7 +99,6 @@
 
                 ref.on("value", function(snapshot) {
                     self.users = [...snapshot.val().user];
-                    console.log(self.users)
                 }, function (error) {
                     console.log("Error: " + error.code);
                 });

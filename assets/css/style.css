@@ -1,6 +1,8 @@
 body{
     background: url("../images/background.png") no-repeat 0 0;
     background-size: cover;
+    width: 100vw;
+    overflow-x: hidden;
 }
 .votes {
     background: rgba(0, 0, 0, .3);
@@ -137,16 +139,4 @@ body{
 }
 .votes__list-item:hover .img {
     border-radius: 50%;
-}
-.find-user {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #000;
-    outline: none;
-}
-
-.find-user:focus {
-    background: transparent;
-    outline: none;
-    box-shadow: none;
 }
