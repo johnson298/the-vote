@@ -8,55 +8,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
-    <div id="app">
-        <div class="row justify-content-center">
-            <div class="col-12 d-flex justify-content-center mb-3">
-                <img class="img-sms" src="./assets/images/main-sms.png" alt="">
+    <div id="app" class="h-100">
+        <!-- <div class="modal-container" v-show="showPopup">
+            <div class="modal-info">
+                <img :src="selected.hinh_anh_thi_sinh" alt="">
             </div>
-            <div class="col-12">
-                <p class="text-center text-danger m-0">
-                    Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang
-                </p>
-            </div>
-            <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-12 col-12">
-                <div class="votes__head d-flex justify-content-between py-2 align-items-center">
-                    <span style="width: 165px;">Xếp hạng</span>
-                    <div class="d-flex w-100">
-                        <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
-                        <input
-                                type="text"
-                                class="form-control find-user"
-                                placeholder="Tìm kiếm thí sinh..."
-                                style="width: 250px;"
-                                v-model="query">
-                    </div>
-                    <span class="text-right mt-2 cursor-pointer" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
+        </div> -->
+        <div class="container container__width h-100">
+            <div class="row h-100 flex-lg-row flex-sm-column">
+                <div class="col-lg-5 col-12 d-flex justify-content-center align-items-center">
+                    <img class="img-sms" src="./assets/images/main-sms.png" alt="">
                 </div>
-                <div class="votes__list ">
-                    <div class="img-loading" v-if="isShown">
-                        <img src="./assets/images/loading.gif" alt="" class="loading" >
-                    </div> 
-                    <div class="votes__list-item" v-for="(user, index) in searchUser" :key="`user_${index}`">
-                        <div class="rank" style="width: 95px;">
-                            <span>{{user.xep_hang}}</span>
+                <!-- <div class="col-12">
+                    <p class="text-center text-danger m-0">
+                        Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang
+                    </p>
+                </div> -->
+                <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-12 col-12">
+                    <div class="votes__head d-flex justify-content-between py-2 align-items-center">
+                        <span style="width: 165px;">Xếp hạng</span>
+                        <div class="d-flex w-100">
+                            <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
+                            <input
+                                    type="text"
+                                    class="form-control find-user"
+                                    placeholder="Tìm kiếm thí sinh..."
+                                    style="width: 250px;"
+                                    v-model="query">
                         </div>
-                        <div class="info">
-                            <div class="img">
-                                <img :src="user.hinh_anh_thi_sinh" alt="">
+                        <span class="mt-2 cursor-pointer" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
+                    </div>
+                    <div class="votes__list ">
+                        <div class="img-loading" v-if="isShown">
+                            <img src="./assets/images/loading.gif" alt="" class="loading" >
+                        </div> 
+                        <div class="votes__list-item" v-for="(user, index) in searchUser" :key="`user_${index}`">
+                            <div class="rank" style="width: 95px;">
+                                <span>{{user.xep_hang}}</span>
                             </div>
-                            <div class="kid-info">
-                                <h4>{{user.ho_va_ten}}</h4>
-                                <small><i class="fas fa-birthday-cake"></i> 10/10/2020</small>
-                                <p><i class="fas fa-map-marker-alt"></i> Hà Nội</p>
-                                <p><strong class="text-warning">MSBD: {{user.so_bao_danh}}</strong></p>
+                            <div class="info">
+                                <div class="img" @click="showInfo(user)">
+                                    <img :src="user.hinh_anh_thi_sinh" :alt="`thi sinh ${user.ho_va_ten}`">
+                                </div>
+                                <div class="kid-info">
+                                    <h4>{{user.ho_va_ten}}</h4>
+                                    <small><i class="fas fa-birthday-cake"></i> {{user.ngay_sinh}}</small>
+                                    <p><i class="fas fa-map-marker-alt"></i> {{user.dia_chi}}</p>
+                                    <p><strong class="text-warning">MSBD: {{user.so_bao_danh}}</strong></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="count-vote">
-                            <span>{{user.so_luot_binh_chon}}</span>
+                            <div class="count-vote">
+                                <span>{{user.so_luot_binh_chon}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,7 +83,9 @@
             return {
                 users: [],
                 query: '',
-                isShown: true
+                isShown: true,
+                selected: null,
+                showPopup: false
             }
         },
 
@@ -144,6 +154,15 @@
                     vm.query = params.sbd;
                 }
 
+            },
+
+            showInfo(info) {
+                this.selected = info;
+                this.showPopup = true;
+            },
+
+            closePopup() {
+                this.showPopup  = false;
             }
 
         },
@@ -167,3 +186,33 @@
 </script>
 </body>
 </html>
+<style>
+    .modal-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: #007bff54;
+}
+
+.modal-info img {
+    width: auto;
+    height: auto;
+}
+
+.modal-info {
+    width: 100%;
+    max-width: 650px;
+    padding: 10px;
+    background: #fff;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.modal-info img {
+    width: 100%;
+}
+</style>

@@ -6,22 +6,19 @@ body{
     overflow: hidden;
 }
 .votes {
-    height: calc(100vh - 30px);
+    height: calc(100vh - 290px);
+    background: #ffffff;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     padding: 0 !important;
     flex: 1;
-    margin-top: 15px;
-    overflow: hidden;
 }
 .votes__head {
-    color: #ffa2a2;
+    color: #000000;
     padding-left: 10px;
     padding-right: 10px;
-    box-shadow: 0 2px 10px rgb(255, 208, 208);
-    background: #ffffffde;
-    font-weight: bold;
+    box-shadow: 0 1px 12px rgba(0,0,0,.2);
 }
 
 .votes__list {
@@ -32,25 +29,24 @@ body{
     padding-left: 0;
     display: flex;
     flex-direction: column;
-    background: #00000078;
 }
 
 .loading {
-    width: 300px;
-    height: auto;
+    width: auto;
+    height: 100%;
 }
 .votes__list::-webkit-scrollbar-thumb {
-    background-color: #f48cb0;
+    background-color: #000000bf;
     border-radius: 6px;
 }
 .votes__list::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #f5f5f500;
+    background-color: #F5F5F5;
 }
 
 .votes__list::-webkit-scrollbar {
-    width: 10px;
-    background-color: #f5f5f52e;
+    width: 6px;
+    background-color: #F5F5F5;
 }
 .votes__list-item {
     display: flex;
@@ -77,10 +73,11 @@ body{
 .kid-info h4 {
     margin-bottom: 0;
     font-size: 16px;
+    color: #000;
 }
 
 .kid-info small, .kid-info p {
-    color: gainsboro;
+    color: black;
 }
 
 .kid-info strong {
@@ -101,7 +98,7 @@ body{
     box-shadow: 0 0 8px #f6bed3a6;
     border: 1.5px solid #fdd2e1;
     padding: 4px 30px;
-    color: #eaeaea;
+    color: #000000;
     font-weight: bold;
     font-size: 13px;
     letter-spacing: 2px;
@@ -118,7 +115,7 @@ body{
     width: 100px;
 }
 .img-sms {
-    width: 75%;
+    width: 215px;
     margin-top: 10px;
 }
 
@@ -186,12 +183,11 @@ body{
     left: 50%;
     top: 0;
     transform: translate(-50%);
-    background: #ffffff;
+    background: #fcfefc;
     width: 100%;
     justify-content: center;
     display: flex;
-    z-index: 99;
-    align-items: center;
+    z-index: 9999;
 }
 .w-130 {
     width: 130px;
@@ -205,7 +201,7 @@ body{
 
 .rank span {
     border-radius: 50%;
-    color: #fff;
+    color: #f6bed2;
     font-size: 23px;
     box-shadow: 0 0 8px #f6bed3a6;
     border: 1.5px solid #fdd2e1;
@@ -256,7 +252,6 @@ body{
 
 .votes {
     height: 500px;
-    flex: auto;
 }
 
 body {
@@ -264,8 +259,4 @@ body {
     height: auto !important;
     overflow-x: hidden;
 }
-}
-.container__width {
-    width: calc(100% - 50px) !important;
-    max-width: 100% !important;
 }
