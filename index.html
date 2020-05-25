@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- BOOTSTRAP CSS -->
-    <link rel="stylesheet" href="font-awesome/5.13.0/js/all.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js">
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
@@ -26,7 +26,7 @@
                 <div class="votes__head d-flex justify-content-between py-2 align-items-center">
                     <span class="w-130">Xếp hạng</span>
                     <div class="d-flex w-100">
-                        <span class="mr-1 mt-2" style="width: 90px;">Thí sinh</span>
+                        <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
                         <input
                                 type="text"
                                 class="form-control find-user"
@@ -35,7 +35,7 @@
                                 v-model="query"
                                 @input="searchUser">
                     </div>
-                    <span class="text-right mt-2" style="width: 200px;">Lượt bình chọn</span>
+                    <span class="text-right mt-2 cursor-pointer" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
                 </div>
                 <div class="votes__list ">
                     <div class="img-loading" v-if="isShown">
@@ -118,6 +118,15 @@
                     console.log("Error: " + error.code);
                 });
             },
+
+            sort(type){
+                let ref = firebase.database().ref();
+                ref.orderByChild(type).on("child_added", function(snapshot) {
+                    // snapshot.val();
+                    console.log(snapshot.val())
+                    self.users = [...snapshot.val()];
+                });
+            }
 
         },
 
