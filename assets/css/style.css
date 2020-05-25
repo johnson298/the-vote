@@ -2,32 +2,64 @@ body{
     background: url("../images/background.png") no-repeat 0 0;
     background-size: cover;
     width: 100vw;
-    overflow-x: hidden;
+    height: 100vh;
+    overflow: hidden;
 }
 .votes {
-    background: rgba(0, 0, 0, .3);
+    height: calc(100vh - 315px);
+    background: #00000078;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    flex: 1;
 }
 .votes__head {
     border-bottom: 1px solid;
     color: #efefef;
-    margin-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
+.votes__list {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 12px 20px;
+    position: relative;
+}
+
+.loading {
+    width: auto;
+    height: 100%;
+}
+.votes__list::-webkit-scrollbar-thumb {
+    background-color: #000000bf;
+    border-radius: 6px;
+}
+.votes__list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.votes__list::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
 .votes__list-item {
     display: flex;
     margin-bottom: 20px;
     cursor: pointer;
 }
 
-.votes__list-item .img {width: 15%;height: 120px;overflow: hidden;border-radius: 10px;box-shadow: 0 0 8px #f6bed3a6;border: 1.5px solid #fdd2e1;transition: all .4s ease-in-out;}
+.votes__list-item .img {width: 16%;height: 106px;overflow: hidden;border-radius: 10px;box-shadow: 0 0 8px #f6bed3a6;border: 1.5px solid #fdd2e1;transition: all .4s ease-in-out;align-items: center;display: flex;}
 
 .votes__list-item .img img {
     width: 100%;
+    min-height: 100%;
 }
 
 .votes__list-item .kid-info {
-    width: 70%;
+    width: 65%;
     padding-left: 15px;
     color: #fff;
 }
@@ -38,6 +70,7 @@ body{
 
 .kid-info h4 {
     margin-bottom: 0;
+    font-size: 16px;
 }
 
 .kid-info small, .kid-info p {
@@ -78,8 +111,8 @@ body{
     width: 100px;
 }
 .img-sms {
-    width: 370px;
-    margin-top: 35px;
+    width: 250px;
+    margin-top: 20px;
 }
 
 .count-vote span:hover{
@@ -139,4 +172,38 @@ body{
 }
 .votes__list-item:hover .img {
     border-radius: 50%;
+}
+.img-loading {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%);
+    background: #e7dfdd;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    z-index: 9999;
+}
+.w-130 {
+    width: 130px;
+}
+.rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rank span {
+    border-radius: 50%;
+    color: #fff;
+    font-size: 23px;
+    box-shadow: 0 0 8px #f6bed3a6;
+    border: 1.5px solid #fdd2e1;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="font-awesome/5.13.0/js/all.min.js">
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
@@ -13,11 +14,17 @@
 <body>
     <div id="app">
         <div class="row justify-content-center">
-            <div class="col-12 d-flex justify-content-center mb-4">
+            <div class="col-12 d-flex justify-content-center mb-3">
                 <img class="img-sms" src="./assets/images/main-sms.png" alt="">
+            </div>
+            <div class="col-12">
+                <p class="text-center text-danger m-0">
+                    Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang
+                </p>
             </div>
             <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-9 col-12">
                 <div class="votes__head d-flex justify-content-between py-2 align-items-center">
+                    <span class="w-130">Xếp hạng</span>
                     <div class="d-flex w-100">
                         <span class="mr-1 mt-2" style="width: 90px;">Thí sinh</span>
                         <input
@@ -30,7 +37,10 @@
                     </div>
                     <span class="text-right mt-2" style="width: 200px;">Lượt bình chọn</span>
                 </div>
-                <div class="votes__list">
+                <div class="votes__list ">
+                    <div class="img-loading" v-if="isShown">
+                        <img src="./assets/images/loading.gif" alt="" class="loading" >
+                    </div>
 <!--                    <div class="votes__list-item">-->
 <!--                        <div class="img">-->
 <!--                            <img src="./assets/images/baby.jpg" alt="">-->
@@ -44,15 +54,18 @@
 <!--                        <div class="count-vote">-->
 <!--                            <span>1520</span>-->
 <!--                        </div>-->
-<!--                    </div>-->
+<!--                    </div>-->   
                     <div class="votes__list-item" v-for="(user, index) in searchUser" :key="`user_${index}`">
+                        <div class="rank" style="width: 95px;">
+                            <span>{{index+1}}</span>
+                        </div>
                         <div class="img">
                             <img :src="user.hinh_anh_thi_sinh" alt="">
                         </div>
                         <div class="kid-info">
                             <h4>{{user.ho_va_ten}}</h4>
-                            <small>10/10/2020</small>
-                            <p>Hà Nội</p>
+                            <small><i class="fas fa-birthday-cake"></i> 10/10/2020</small>
+                            <p><i class="fas fa-map-marker-alt"></i> Hà Nội</p>
                             <p><strong class="text-warning">MSBC: {{user.so_bao_danh}}</strong></p>
                         </div>
                         <div class="count-vote">
@@ -74,7 +87,8 @@
         data() {
             return {
                 users: [],
-                query: ''
+                query: '',
+                isShown: true
             }
         },
 
@@ -99,6 +113,7 @@
 
                 ref.on("value", function(snapshot) {
                     self.users = [...snapshot.val().user];
+                    self.isShown = false;
                 }, function (error) {
                     console.log("Error: " + error.code);
                 });
