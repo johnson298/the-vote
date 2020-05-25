@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- BOOTSTRAP CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
@@ -40,24 +40,10 @@
                 <div class="votes__list ">
                     <div class="img-loading" v-if="isShown">
                         <img src="./assets/images/loading.gif" alt="" class="loading" >
-                    </div>
-<!--                    <div class="votes__list-item">-->
-<!--                        <div class="img">-->
-<!--                            <img src="./assets/images/baby.jpg" alt="">-->
-<!--                        </div>-->
-<!--                        <div class="kid-info">-->
-<!--                            <h4>Nguyễn Thanh Tú</h4>-->
-<!--                            <small>10/10/2020</small>-->
-<!--                            <p>Hà Nội</p>-->
-<!--                            <p><strong class="text-warning">MSBC: 01</strong></p>-->
-<!--                        </div>-->
-<!--                        <div class="count-vote">-->
-<!--                            <span>1520</span>-->
-<!--                        </div>-->
-<!--                    </div>-->   
+                    </div> 
                     <div class="votes__list-item" v-for="(user, index) in searchUser" :key="`user_${index}`">
                         <div class="rank" style="width: 95px;">
-                            <span>{{index+1}}</span>
+                            <span>{{user.xep_hang}}</span>
                         </div>
                         <div class="img">
                             <img :src="user.hinh_anh_thi_sinh" alt="">
@@ -112,20 +98,32 @@
                 let ref = firebase.database().ref();
 
                 ref.on("value", function(snapshot) {
-                    self.users = [...snapshot.val().user];
                     self.isShown = false;
+                    const respon = [...snapshot.val().user];
+                    respon.sort((a,b) => (a.so_luot_binh_chon <b.so_luot_binh_chon) ? 1 : ((b.so_luot_binh_chon < a.so_luot_binh_chon) ? -1 : 0));
+                    const data = [...respon.map((item, index) => ({
+                        ...item,
+                        xep_hang: index + 1
+                    }))];
+                    self.users = data;
+                    
                 }, function (error) {
                     console.log("Error: " + error.code);
                 });
             },
 
             sort(type){
-                let ref = firebase.database().ref();
-                ref.orderByChild(type).on("child_added", function(snapshot) {
-                    // snapshot.val();
-                    console.log(snapshot.val())
-                    self.users = [...snapshot.val()];
-                });
+                // let ref = firebase.database().ref();
+                // ref.orderByChild(type).on("child_added", function(snapshot) {
+                //     // snapshot.val();
+                //     const respon = snapshot.val();
+                //     console.log(respon[0].so_luot_binh_chon)
+                //     respon.sort((a,b) => (a.so_luot_binh_chon < b.so_luot_binh_chon) ? 1 : ((b.so_luot_binh_chon < a.so_luot_binh_chon) ? -1 : 0));
+                //     self.users = respon;
+                //     self.users = respon.map(item => {
+                        
+                //     })
+                // });
             }
 
         },
