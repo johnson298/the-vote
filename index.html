@@ -22,9 +22,9 @@
                     Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang
                 </p>
             </div>
-            <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-9 col-12">
+            <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-12 col-12">
                 <div class="votes__head d-flex justify-content-between py-2 align-items-center">
-                    <span class="w-130">Xếp hạng</span>
+                    <span style="width: 165px;">Xếp hạng</span>
                     <div class="d-flex w-100">
                         <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
                         <input
@@ -44,14 +44,16 @@
                         <div class="rank" style="width: 95px;">
                             <span>{{user.xep_hang}}</span>
                         </div>
-                        <div class="img">
-                            <img :src="user.hinh_anh_thi_sinh" alt="">
-                        </div>
-                        <div class="kid-info">
-                            <h4>{{user.ho_va_ten}}</h4>
-                            <small><i class="fas fa-birthday-cake"></i> 10/10/2020</small>
-                            <p><i class="fas fa-map-marker-alt"></i> Hà Nội</p>
-                            <p><strong class="text-warning">MSBD: {{user.so_bao_danh}}</strong></p>
+                        <div class="info">
+                            <div class="img">
+                                <img :src="user.hinh_anh_thi_sinh" alt="">
+                            </div>
+                            <div class="kid-info">
+                                <h4>{{user.ho_va_ten}}</h4>
+                                <small><i class="fas fa-birthday-cake"></i> 10/10/2020</small>
+                                <p><i class="fas fa-map-marker-alt"></i> Hà Nội</p>
+                                <p><strong class="text-warning">MSBD: {{user.so_bao_danh}}</strong></p>
+                            </div>
                         </div>
                         <div class="count-vote">
                             <span>{{user.so_luot_binh_chon}}</span>
