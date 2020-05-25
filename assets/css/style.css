@@ -54,7 +54,7 @@ body{
 }
 .votes__list-item {
     display: flex;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
     cursor: pointer;
 }
 

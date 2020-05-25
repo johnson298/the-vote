@@ -21,8 +21,11 @@
         </div> -->
         <div class="container container__width h-100">
             <div class="row h-100 flex-lg-row flex-sm-column">
-                <div class="col-lg-5 col-12 d-flex justify-content-center align-items-center">
-                    <img class="img-sms" src="./assets/images/main-sms.png" alt="">
+                <div class="col-lg-5 col-12 d-flex justify-content-center align-items-center flex-column">
+                    <img class="img-sms mb-3" src="./assets/images/main-sms.png" alt="">
+                    <p class="text-center text-danger m-0 font-weight-bold">
+                        Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang !
+                    </p>
                 </div>
                 <!-- <div class="col-12">
                     <p class="text-center text-danger m-0">
@@ -36,9 +39,9 @@
                             class="find-user w-100"
                             placeholder="Tìm kiếm thí sinh..."
                             v-model="query">
-                        <span style="width: 165px;">Xếp hạng</span>
-                        <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
-                        <span class="mt-2 cursor-pointer" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
+                        <span class="text-left" style="width: 165px;">Xếp hạng</span>
+                        <span class="mr-1 mt-2 cursor-pointer text-center" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
+                        <span class="mt-2 cursor-pointer text-right" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
                     </div>
                     <div class="votes__list ">
                         <div class="img-loading" v-if="isShown">
