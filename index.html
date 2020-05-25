@@ -30,17 +30,14 @@
                     </p>
                 </div> -->
                 <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-12 col-12">
-                    <div class="votes__head d-flex justify-content-between py-2 align-items-center">
+                    <div class="votes__head d-flex justify-content-between py-2 align-items-center flex-wrap">
+                        <input
+                            type="text"
+                            class="find-user w-100"
+                            placeholder="Tìm kiếm thí sinh..."
+                            v-model="query">
                         <span style="width: 165px;">Xếp hạng</span>
-                        <div class="d-flex w-100">
-                            <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
-                            <input
-                                    type="text"
-                                    class="form-control find-user"
-                                    placeholder="Tìm kiếm thí sinh..."
-                                    style="width: 250px;"
-                                    v-model="query">
-                        </div>
+                        <span class="mr-1 mt-2 cursor-pointer" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
                         <span class="mt-2 cursor-pointer" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
                     </div>
                     <div class="votes__list ">

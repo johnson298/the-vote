@@ -36,7 +36,7 @@ body{
 }
 
 .loading {
-    width: 300px;
+    width: 200px;
     height: auto;
 }
 .votes__list::-webkit-scrollbar-thumb {
@@ -100,7 +100,6 @@ body{
 .count-vote span {
     box-shadow: 0 0 8px #f6bed3a6;
     border: 1.5px solid #fdd2e1;
-    padding: 4px 30px;
     color: #eaeaea;
     font-weight: bold;
     font-size: 13px;
@@ -116,6 +115,8 @@ body{
     background: transparent!important;
     z-index:10;
     width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .img-sms {
     width: 75%;
@@ -229,6 +230,41 @@ body{
 @media (max-width: 556px) {
     * {}
 
+.kid-info strong {
+    font-size: 15px;
+}
+
+.kid-info h4 {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.votes__head {
+    justify-content: normal !important;
+}
+
+.votes__head span {
+    width: 32% !important;
+    font-size: 13px;
+    text-align: center;
+}
+
+.votes__head > span:nth-child(2) {
+    text-align: left !important;
+}
+
+.votes__head > span:nth-child(4) {
+    text-align: right !important;
+}
+
+.count-vote {
+    width: 70px !important;
+}
+
+.rank {
+    width: 60px !important;
+}
+
 .img-sms {
     width: 155px;
 }
@@ -268,4 +304,11 @@ body {
 .container__width {
     width: calc(100% - 50px) !important;
     max-width: 100% !important;
+}
+.find-user{
+    border: none;
+    padding: 3px;
+    background: none;
+    border-bottom: 1px solid #f6bed2;
+    outline: none;
 }
