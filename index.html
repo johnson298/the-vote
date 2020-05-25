@@ -32,8 +32,7 @@
                                 class="form-control find-user"
                                 placeholder="Tìm kiếm thí sinh..."
                                 style="width: 250px;"
-                                v-model="query"
-                                @input="searchUser">
+                                v-model="query">
                     </div>
                     <span class="text-right mt-2 cursor-pointer" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
                 </div>
@@ -52,7 +51,7 @@
                             <h4>{{user.ho_va_ten}}</h4>
                             <small><i class="fas fa-birthday-cake"></i> 10/10/2020</small>
                             <p><i class="fas fa-map-marker-alt"></i> Hà Nội</p>
-                            <p><strong class="text-warning">MSBC: {{user.so_bao_danh}}</strong></p>
+                            <p><strong class="text-warning">MSBD: {{user.so_bao_danh}}</strong></p>
                         </div>
                         <div class="count-vote">
                             <span>{{user.so_luot_binh_chon}}</span>
@@ -80,6 +79,7 @@
 
         created() {
           this.fetch();
+          this.checkParamUrl();
         },
 
         methods: {
@@ -124,19 +124,41 @@
                         
                 //     })
                 // });
+            },
+
+            checkParamUrl() {
+                const vm = this;
+                const getUrlParams = (url) => {
+                    const hashes = url.slice(url.indexOf('?') + 1).split('&')
+                    const params = {}
+                    hashes.map(hash => {
+                        const [key, val] = hash.split('=')
+                        params[key] = decodeURIComponent(val)
+                    })
+                    return params
+                }
+                const params = getUrlParams(window.location.href)
+                if(params.hasOwnProperty('sbd')){
+                    vm.query = params.sbd;
+                }
+
             }
 
         },
 
         computed: {
             searchUser() {
-                if(this.query){
-                    return this.users.filter((item)=>{
-                        return this.query.toLowerCase().split(' ').every(v => item.ho_va_ten.toLowerCase().includes(v))
-                    })
-                }else{
-                    return this.users;
-                }
+                // if(this.query){
+                //     return this.users.filter((item)=>{
+                //         return this.query.toLowerCase().split(' ').every(v => item.ho_va_ten.toLowerCase().includes(v))
+                //     })
+                // }else{
+                //     return this.users;
+                // }
+                let query = this.query.toLowerCase();
+                return query
+				? this.users.filter(item => item.ho_va_ten.toLowerCase().includes(this.query) || item.so_bao_danh.toLowerCase().includes(this.query))
+				: this.users
             }
         }
     })
