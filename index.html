@@ -15,11 +15,6 @@
 </head>
 <body>
     <div id="app" class="h-100">
-        <!-- <div class="modal-container" v-show="showPopup">
-            <div class="modal-info">
-                <img :src="selected.hinh_anh_thi_sinh" alt="">
-            </div>
-        </div> -->
         <div class="container container__width h-100">
             <div class="row h-100 flex-lg-row flex-sm-column">
                 <div class="col-lg-5 col-12 d-flex justify-content-center align-items-center flex-column">
@@ -28,11 +23,6 @@
                         Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang !
                     </p>
                 </div>
-                <!-- <div class="col-12">
-                    <p class="text-center text-danger m-0">
-                        Lưu ý: Hệ thống sẽ tự động cập nhật dữ liệu bình chọn mới nên các bạn không cần tải lại trang
-                    </p>
-                </div> -->
                 <div class="votes px-3 py-2 col-lg-7 col-md-8 col-sm-12 col-12">
                     <div class="votes__head d-flex justify-content-between py-2 align-items-center flex-wrap">
                         <input
@@ -41,8 +31,8 @@
                             placeholder="Tìm kiếm thí sinh..."
                             v-model="query">
                         <span class="text-left" style="width: 165px;">Xếp hạng</span>
-                        <span class="mr-1 mt-2 cursor-pointer text-center" style="width: 90px;" @click="sort('ho_va_ten')">Thí sinh</span>
-                        <span class="mt-2 cursor-pointer text-right" style="width: 200px;" @click="sort('so_luot_binh_chon')">Lượt bình chọn</span>
+                        <span class="mr-1 mt-2 cursor-pointer text-center" style="width: 90px;" >Thí sinh</span>
+                        <span class="mt-2 cursor-pointer text-right" style="width: 200px;">Lượt bình chọn</span>
                     </div>
                     <div class="votes__list ">
                         <div class="img-loading" v-if="isShown">
@@ -73,7 +63,6 @@
         </div>
     </div>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
 
@@ -111,34 +100,26 @@
                 let ref = firebase.database().ref();
 
                 ref.on("value", function(snapshot) {
-                    console.log(snapshot.val().user)
                     self.isShown = false;
-                    const respon = [...snapshot.val().user];
-                    respon.sort((a,b) => (a.so_luot_binh_chon <b.so_luot_binh_chon) ? 1 : ((b.so_luot_binh_chon < a.so_luot_binh_chon) ? -1 : 0));
-                    const data = [...respon.map((item, index) => ({
+                    const respon = snapshot.val().user.map((item, index) => ({
+                        id: index,
+                        ...item
+                    }))
+                    const responSort = [...respon];
+                    responSort.sort((a,b) => (a.so_luot_binh_chon < b.so_luot_binh_chon) ? 1 : ((b.so_luot_binh_chon < a.so_luot_binh_chon) ? -1 : 0));
+                    const data = [...responSort.map((item, index) => ({
                         ...item,
                         xep_hang: index + 1
                     }))];
-                      console.log(data)
-                    self.users = data;
+                    respon.forEach((res, i) => {
+                        console.log(data.find(e => e.id == res.id))
+                        res['xep_hang'] = data.find(e => e.id == res.id).xep_hang
+                    })
+                    self.users = respon;
                     
                 }, function (error) {
                     console.log("Error: " + error.code);
                 });
-            },
-
-            sort(type){
-                // let ref = firebase.database().ref();
-                // ref.orderByChild(type).on("child_added", function(snapshot) {
-                //     // snapshot.val();
-                //     const respon = snapshot.val();
-                //     console.log(respon[0].so_luot_binh_chon)
-                //     respon.sort((a,b) => (a.so_luot_binh_chon < b.so_luot_binh_chon) ? 1 : ((b.so_luot_binh_chon < a.so_luot_binh_chon) ? -1 : 0));
-                //     self.users = respon;
-                //     self.users = respon.map(item => {
-                        
-                //     })
-                // });
             },
 
             checkParamUrl() {
@@ -172,13 +153,6 @@
 
         computed: {
             searchUser() {
-                // if(this.query){
-                //     return this.users.filter((item)=>{
-                //         return this.query.toLowerCase().split(' ').every(v => item.ho_va_ten.toLowerCase().includes(v))
-                //     })
-                // }else{
-                //     return this.users;
-                // }
                 let query = this.query.toLowerCase();
                 return query
 				? this.users.filter(item => item.ho_va_ten.toLowerCase().includes(this.query) || item.so_bao_danh.toLowerCase().includes(this.query))
@@ -189,33 +163,3 @@
 </script>
 </body>
 </html>
-<style>
-    .modal-container {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-    background: #007bff54;
-}
-
-.modal-info img {
-    width: auto;
-    height: auto;
-}
-
-.modal-info {
-    width: 100%;
-    max-width: 650px;
-    padding: 10px;
-    background: #fff;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-}
-
-.modal-info img {
-    width: 100%;
-}
-</style>
