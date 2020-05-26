@@ -112,7 +112,6 @@
                         xep_hang: index + 1
                     }))];
                     respon.forEach((res, i) => {
-                        console.log(data.find(e => e.id == res.id))
                         res['xep_hang'] = data.find(e => e.id == res.id).xep_hang
                     })
                     self.users = respon;
