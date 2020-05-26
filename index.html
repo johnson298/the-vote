@@ -110,6 +110,7 @@
                 let ref = firebase.database().ref();
 
                 ref.on("value", function(snapshot) {
+                    console.log(snapshot.val().user)
                     self.isShown = false;
                     const respon = [...snapshot.val().user];
                     respon.sort((a,b) => (a.so_luot_binh_chon <b.so_luot_binh_chon) ? 1 : ((b.so_luot_binh_chon < a.so_luot_binh_chon) ? -1 : 0));
@@ -117,6 +118,7 @@
                         ...item,
                         xep_hang: index + 1
                     }))];
+                      console.log(data)
                     self.users = data;
                     
                 }, function (error) {

@@ -232,7 +232,7 @@ body{
 .votes__list {
     padding: 0;
 }
-
+~
 .votes__list-item {
     border-bottom: 1px solid #dcaad2;
     padding-top: 15px;
